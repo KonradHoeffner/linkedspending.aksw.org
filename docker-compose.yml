@@ -1,0 +1,26 @@
+services:
+  knowledgebase: 
+    build: .
+    volumes:
+      - kb:/kb
+
+  rickview:
+    image: ghcr.io/konradhoeffner/rickview:master
+    volumes:
+      - kb:/kb
+    environment:
+      - RICKVIEW_KB_FILE=/kb/lscomplete20143.hdt
+      - RICKVIEW_PREFIX=ls
+      - RICKVIEW_NAMESPACE=http://linkedspending.aksw.org/
+      - RICKVIEW_TITLE=LinkedSpending
+      - RICKVIEW_SUBTITLE=government spendings from all over the world as Linked Data
+      - RICKVIEW_EXAMPLES=instance/finland-aid
+      - RICKVIEW_GITHUB=https://github.com/konradhoeffner/linkedspending
+      - RICKVIEW_DOC=http://www.semantic-web-journal.net/system/files/swj923.pdf
+      - CARGO_INCREMENTAL=0
+    ports:
+      - "127.0.0.1:8080:8080"
+    #restart: unless-stopped
+
+volumes:
+  kb:
