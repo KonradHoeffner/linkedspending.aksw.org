@@ -1,0 +1,13 @@
+[namespaces]
+lso = "http://linkedspending.aksw.org/ontology/"
+lsi = "http://linkedspending.aksw.org/instance/"
+rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+rdfs = "http://www.w3.org/2000/01/rdf-schema#"
+owl = "http://www.w3.org/2002/07/owl#"
+qb = "http://purl.org/linked-data/cube#"
+xsd = "http://www.w3.org/2001/XMLSchema#"
+sdmx = "http://purl.org/linked-data/sdmx#"
+sdmx-dimension = "http://purl.org/linked-data/sdmx/2009/dimension#"
+sdmx-attribute = "http://purl.org/linked-data/sdmx/2009/attribute#"
+sdmx-concept = "http://purl.org/linked-data/sdmx/2009/concept#"
+dbo = "http://dbpedia.org/ontology/"
