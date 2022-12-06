@@ -7,10 +7,10 @@ services:
   rickview:
     image: ghcr.io/konradhoeffner/rickview:master
     volumes:
-      - kb:/kb
-      - ./rickview/data:/app/data
+      - kb:/kb:ro
+      - ./rickview/data:/app/data:ro
     environment:
-      - RICKVIEW_KB_FILE=/kb/lscomplete20143.hdt
+      - RICKVIEW_KB_FILE=/kb/lscomplete2015.hdt.zst
       - RICKVIEW_PREFIX=ls
       - RICKVIEW_NAMESPACE=http://linkedspending.aksw.org/
       - RICKVIEW_TITLE=LinkedSpending
@@ -18,6 +18,8 @@ services:
       - RICKVIEW_EXAMPLES=instance/finland-aid
       - RICKVIEW_GITHUB=https://github.com/konradhoeffner/linkedspending
       - RICKVIEW_DOC=https://nbn-resolving.org/urn:nbn:de:bsz:15-qucosa2-742429
+      - RICKVIEW_LARGE=true
+      - RICKVIEW_LOG_LEVEL=debug
       - CARGO_INCREMENTAL=0
     ports:
       - "127.0.0.1:8080:8080"
