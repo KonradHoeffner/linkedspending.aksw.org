@@ -22,7 +22,7 @@ services:
       - RICKVIEW_LOG_LEVEL=debug
       - CARGO_INCREMENTAL=0
     ports:
-      - "127.0.0.1:8080:8080"
+      - "${RICKVIEW_PORT:-127.0.0.1:8080}:8080"
     #restart: unless-stopped
 
 volumes:
