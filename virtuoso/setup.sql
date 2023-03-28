@@ -1,0 +1,21 @@
+log_message('Setup: Activate CORS');
+update DB.DBA.HTTP_PATH set HP_OPTIONS = serialize(vector('browse_sheet', '', 'noinherit', 'yes', 'cors', '*', 'cors_restricted', 0))  where HP_LPATH = '/sparql';
+log_message('Setup: Create graph http://linkedspending.aksw.org');
+--log_message('Setup: Create graphs and graph group http://linkedspending.aksw.org/');
+--DB.DBA.RDF_GRAPH_GROUP_CREATE('http://linkedspending.aksw.org/',1);
+--DB.DBA.RDF_GRAPH_GROUP_INS ('http://linkedspending.aksw.org/', 'http://linkedspending.aksw.org/ontology/');
+DB.DBA.XML_SET_NS_DECL ('owl', 'http://www.w3.org/2002/07/owl#', 2);
+DB.DBA.XML_SET_NS_DECL ('ls', 'http://linkedspending.aksw.org/instance/', 2);
+DB.DBA.XML_SET_NS_DECL ('lso', 'http://linkedspending.aksw.org/ontology/', 2);
+DB.DBA.XML_SET_NS_DECL ('qb', 'http://purl.org/linked-data/cube#', 2);
+DB.DBA.XML_SET_NS_DECL ('sdmxd', 'http://purl.org/linked-data/sdmx/2009/dimension#', 2);
+DB.DBA.XML_SET_NS_DECL ('dbpedia', 'http://dbpedia.org/resource/', 2);
+DB.DBA.XML_SET_NS_DECL ('dbr', 'http://dbpedia.org/resource/', 2);
+DB.DBA.XML_SET_NS_DECL ('dbp', 'http://dbpedia.org/property/', 2);
+DB.DBA.XML_SET_NS_DECL ('lgd', 'http://linkedgeodata.org/triplify/', 2);
+log_message('Setup: Load data from .ttl and .nt files');
+ld_dir_all ('toload', '*.ttl', 'http://linkedspending.aksw.org');
+ld_dir_all ('toload', '*.nt', 'http://linkedspending.aksw.org');
+--ld_dir_all ('toload', '*.nt', NULL); -- determine graph name from .graph file
+rdf_loader_run();
+log_message('Setup: Finished');
