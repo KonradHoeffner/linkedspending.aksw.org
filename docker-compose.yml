@@ -25,7 +25,21 @@ services:
       - "${RICKVIEW_PORT:-127.0.0.1:8080}:8080"
     #restart: unless-stopped
 
-# todo: add lodview for comparison
+  # http://localhost:8889/ontology
+  lodview:
+    image: ghcr.io/konradhoeffner/lodview:latest
+    profiles: ["lodview"]
+    environment:
+      # server side, so we use the port on the internal port
+      - LodViewendpoint=http://virtuoso:8890/sparql
+      - LodViewIRInamespace=http://linkedspending.aksw.org/
+      - LodViewIRIhomeUrl=http://linkedspending.aksw.org/instance/finland-aid/model
+    ports:
+      - "127.0.0.1:8081:8080"
+    depends_on:
+      - virtuoso
+    restart: unless-stopped
+
 
 # requires ntriples and/or turtle files in ./toload on the host
   virtuoso:
