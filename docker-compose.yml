@@ -25,9 +25,11 @@ services:
       - "${RICKVIEW_PORT:-127.0.0.1:8080}:8080"
     #restart: unless-stopped
 
-# requires ./data/linkedspending.nt to be available on the host
+# todo: add lodview for comparison
+
+# requires ntriples and/or turtle files in ./toload on the host
   virtuoso:
-    image: openlink/virtuoso-opensource-7:7.2.7
+    image: openlink/virtuoso-opensource-7:7.2.12
     environment:
       - DBA_PASSWORD=${DBA_PASSWORD}
       - VIRT_DATABASE_ERRORLOGLEVEL=3
